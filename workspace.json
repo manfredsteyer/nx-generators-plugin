@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "projects": {
+    "my-plugin": {
+      "root": "packages/my-plugin",
+      "sourceRoot": "packages/my-plugin/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "packages/my-plugin/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/packages/my-plugin"
+          ],
+          "options": {
+            "jestConfig": "packages/my-plugin/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/packages/my-plugin",
+            "tsConfig": "packages/my-plugin/tsconfig.lib.json",
+            "packageJson": "packages/my-plugin/package.json",
+            "main": "packages/my-plugin/src/index.ts",
+            "assets": [
+              "packages/my-plugin/*.md",
+              {
+                "input": "./packages/my-plugin/src",
+                "glob": "**/*.!(ts)",
+                "output": "./src"
+              },
+              {
+                "input": "./packages/my-plugin",
+                "glob": "generators.json",
+                "output": "."
+              },
+              {
+                "input": "./packages/my-plugin",
+                "glob": "executors.json",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "my-plugin-e2e": {
+      "projectType": "application",
+      "root": "e2e\\my-plugin-e2e",
+      "sourceRoot": "e2e\\my-plugin-e2e/src",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/nx-plugin:e2e",
+          "options": {
+            "target": "my-plugin:build",
+            "npmPackageName": "@my-org/my-plugin",
+            "pluginOutputPath": "dist/packages/my-plugin",
+            "jestConfig": "e2e/my-plugin-e2e/jest.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  }
+}
