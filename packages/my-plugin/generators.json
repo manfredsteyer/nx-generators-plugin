@@ -3,10 +3,10 @@
   "name": "my-plugin",
   "version": "0.0.1",
   "generators": {
-    "my-plugin": {
-      "factory": "./src/generators/my-plugin/generator",
-      "schema": "./src/generators/my-plugin/schema.json",
-      "description": "my-plugin generator"
+    "entity": {
+      "factory": "./src/generators/entity/index",
+      "schema": "./src/generators/entity/schema.json",
+      "description": "Generates an entity"
     }
   }
 }

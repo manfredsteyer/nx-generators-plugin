@@ -1,0 +1,21 @@
+{
+  "cli": "nx",
+  "id": "entity",
+  "type": "object",
+  "properties": {
+    "entity": {
+      "type": "string",
+      "description": "Entity name",
+      "x-prompt": "Entity name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "project": {
+      "type": "string",
+      "description": "Project name"
+    }   
+  },
+  "required": ["entity"]
+}
